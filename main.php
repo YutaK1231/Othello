@@ -45,8 +45,7 @@ if (isset($_POST['reset'])) {
 // ===========================================
 // 関数
 // ===========================================
-
-// 初期盤面
+// 初期盤面の生成
 function init() {
     $board = array_fill(0, 8, array_fill(0, 8, 0));
     $board[3][3] = -1; // 白
@@ -82,7 +81,7 @@ function judgeStone($bd, $r, $c, $stone) {
                 continue; 
             }
 
-            while($bd[$i][$j] == -$stone) {
+            while($bd[$i][$j] == -$stone) { // 調べるマスに相手の石がある間
                 // 調べるマスを(di, dj)ベクトルの方向に移動
                 $i += $di;
                 $j += $dj;
@@ -120,8 +119,9 @@ function flipStone(&$bd, $r, $c, $stone) {
         // 盤外ならスキップ 
         if($i < 0 || $i > 7 || $j < 0 || $j > 7) { 
             continue; 
-        } 
-        while($bd[$i][$j] == -$stone) {
+        }
+
+        while($bd[$i][$j] == -$stone) { // 調べるマスに相手の石がある間
             // 調べるマスを(di, dj)ベクトルの方向に移動
             $i += $di; 
             $j += $dj;
